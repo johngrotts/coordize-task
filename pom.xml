@@ -13,10 +13,19 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<name>coordize-task</name>
 	<description>Coordize Task Service</description>
+
 	<properties>
+		<coordize.user.version>0.0.1-SNAPSHOT</coordize.user.version>
 		<java.version>17</java.version>
 	</properties>
+
 	<dependencies>
+		<dependency>
+			<groupId>com.coordize</groupId>
+			<artifactId>coordize-user</artifactId>
+			<version>${coordize.user.version}</version>
+		</dependency>
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
