@@ -1,6 +1,5 @@
 package com.coordize.coordizetask.models;
 
-import com.coordize.coordizeuser.models.User;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -21,10 +20,8 @@ public class Task extends BaseDate {
     private String title;
     private String description;
     private LocalDate completeDate;
-    @OneToOne
-    private User assigner;
-    @OneToOne
-    private User assignee;
+    private long assignerId;
+    private long assigneeId;
     /**
      * Allows for tasks to be subtasks of one another.
      * Sublevel is an int where 0 is top level, 1 is the first sub-level and so on

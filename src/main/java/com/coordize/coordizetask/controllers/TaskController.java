@@ -2,19 +2,20 @@ package com.coordize.coordizetask.controllers;
 
 import com.coordize.coordizetask.models.Task;
 import com.coordize.coordizetask.services.TaskService;
-import com.coordize.coordizeuser.models.User;
-import com.coordize.coordizeuser.services.UserService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
-import java.util.Optional;
+import java.util.Map;
 
 @RequestMapping("task")
 @RestController
 public class TaskController {
 
-    private TaskService service;
-    private UserService userService;
+    private final TaskService service;
+
+    public TaskController(TaskService service) {
+        this.service = service;
+    }
 
     @GetMapping(path = "/{id}", produces = "application/json")
     public Task getTask(@PathVariable long id) {
@@ -22,8 +23,20 @@ public class TaskController {
     }
 
     @GetMapping(path = "/search", produces = "application/json")
-    public ArrayList<Task> getTasks(@RequestParam(required = false) long assignerId) {
-        User assigner = this.userService.findByUserId(assignerId).orElse(null);
-        return this.service.getAllTasksUsingAssigner(assigner).orElse(null);
+    public ArrayList<Task> getTasks(Map<String, String> params) {
+        if(params.isEmpty()) {
+            return new ArrayList<>();
+        }
+        if(params.containsKey("assignerId")) {
+            long userId = Long.parseLong(params.get("assignerId"));
+            return this.service.getAllTasksByAssigner(userId).orElse(null);
+        }
+        if(params.containsKey("assigneeId")) {
+            long userId = Long.parseLong(params.get("assigneeId"));
+            return this.service.getAllTasksByAssignee(userId).orElse(null);
+        }
+        return new ArrayList<>();
     }
+
+
 }

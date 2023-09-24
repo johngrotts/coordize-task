@@ -1,6 +1,5 @@
 package com.coordize.coordizetask.models;
 
-import com.coordize.coordizeuser.models.User;
 import jakarta.persistence.OneToOne;
 import lombok.Data;
 
@@ -11,8 +10,7 @@ public class TaskOrder {
 
     private long id;
     private String taskGroup;
-    @OneToOne
-    private User createdBy;
+    private long createdById;
     @OneToOne
     private Map<Long, Task> taskOrder;
 

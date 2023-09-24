@@ -1,6 +1,5 @@
 package com.coordize.coordizetask.models;
 
-import com.coordize.coordizeuser.models.User;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -21,9 +20,7 @@ public class TaskReward {
     private Reward reward;
     private LocalDate assignDate;
     private LocalDate completeDate;
-    @OneToOne
-    private User assigner;
-    @OneToOne
-    private User assignee;
+    private long assignerId;
+    private long assigneeId;
 
 }

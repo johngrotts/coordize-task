@@ -1,6 +1,5 @@
 package com.coordize.coordizetask.models;
 
-import com.coordize.coordizeuser.models.User;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -23,7 +22,6 @@ public class ScoreSystem extends BaseDate {
     private int maximum;
     @OneToMany
     private Set<Task> tasks;
-    @OneToOne
-    private User creator;
+    private long creatorId;
 
 }
